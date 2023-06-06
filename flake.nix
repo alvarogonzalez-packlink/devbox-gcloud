@@ -1,5 +1,5 @@
 {
-  description = "A devbox shell";
+  description = "A flake.nix package for google cloud sdk package with auth plugin installed";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/8670e496ffd093b60e74e7fa53526aa5920d09eb";
