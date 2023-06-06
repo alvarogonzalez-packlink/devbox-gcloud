@@ -30,6 +30,8 @@
             (nixpkgs-8670e4-pkgs.google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
           ];
         };
-      }
+      };
+      packages = { inherit (pkgs) mohsenari-gce; };
+      defaultPackage = self.package."${system}".mohsenari-gce
     );
 }
