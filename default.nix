@@ -1,7 +1,8 @@
+# Looked for the hash in https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=google-cloud-sdk
 let
   pkgs = import
     (fetchTarball {
-      url = "https://github.com/nixos/nixpkgs/archive/8670e496ffd093b60e74e7fa53526aa5920d09eb.tar.gz";
+      url = "https://github.com/nixos/nixpkgs/archive/9957cd48326fe8dbd52fdc50dd2502307f188b0d.tar.gz";
     })
     { };
 in
