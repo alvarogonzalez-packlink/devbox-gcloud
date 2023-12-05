@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/9957cd48326fe8dbd52fdc50dd2502307f188b0d";
-    nixpkgs-unstable.url = github:NixOS/nixpkgs/nixos-unstable;
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs-9957cd.url = "github:NixOS/nixpkgs/9957cd48326fe8dbd52fdc50dd2502307f188b0d";
   };
@@ -27,7 +26,7 @@
           cloud_sql_proxy
           cbt
         ]);
-        packlink-telepresence = nixpkgs-unstable.stdenv.mkDerivation {
+        packlink-telepresence = pkgs.stdenv.mkDerivation {
           name = "kubectl-presence";
           version = "v1.1.0";
           src = nixpkgs-unstable.fetchFromGitHubPrivate {
