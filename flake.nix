@@ -26,6 +26,17 @@
           cloud_sql_proxy
           cbt
         ]);
+        kubectl-presence = nixpkgs.stdenv.mkDerivation {
+          name = "kubectl-presence";
+          version = "v1.1.0";
+          src = nixpkgs.fetchFromGitHubPrivate {
+            owner = "packlink-dev";
+            repo = "packlink-telepresence";
+            rev = "v1.1.0";
+            sha256 = "a2f460d5a8f8b3920761922d3c6f4f02ce90d9b827a26885eb7d7377a9e8da19"; # Add the correct hash for your release binary
+          };
+          installPhase = "install -Dm755 $src $out/bin/kubectl-presence";
+        };
       };
     });
 }
