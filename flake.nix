@@ -2,20 +2,28 @@
   description = "A flake.nix package for google cloud sdk package with auth plugin installed";
 
   inputs = {
+    nixunstable.url = "nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/9957cd48326fe8dbd52fdc50dd2502307f188b0d";
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs-9957cd.url = "github:NixOS/nixpkgs/9957cd48326fe8dbd52fdc50dd2502307f188b0d";
   };
 
   outputs =
     { self
     , nixpkgs
-    , nixpkgs-9957cd
+    , nixunstable
     , flake-utils
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
+      unstablepkgs = nixunstable.legacyPackages.${system};
+      gems = unstablepkgs.bundlerEnv {
+          name = "gems";
+          ruby = pkgs.ruby;
+          gemfile = ./bashly/Gemfile;
+          lockfile = ./bashly/Gemfile.lock;
+          gemset = ./bashly/gemset.nix;
+        };
     in
     {
       packages = {
@@ -29,13 +37,20 @@
         packlink-telepresence = pkgs.stdenv.mkDerivation {
           name = "kubectl-presence";
           version = "v1.1.0";
-          src = pkgs.fetchFromGitHubPrivate {
-            owner = "packlink-dev";
-            repo = "packlink-telepresence";
-            rev = "v1.1.0";
-            sha256 = "a2f460d5a8f8b3920761922d3c6f4f02ce90d9b827a26885eb7d7377a9e8da19"; # Add the correct hash for your release binary
-          };
-          installPhase = "install -Dm755 $src $out/bin/kubectl-presence";
+          src = builtins.fetchGit {
+            url= "git@github.com:packlink-dev/packlink-telepresence.git";
+            ref = "refs/tags/v1.1.0";
+            narHash = "sha256-JhjhtU7vmvs1+gDn6HJnbJNflNDNPe963NA1rrJXRI0=";
+            # nix-prefetch-git --url git@github.com:packlink-dev/packlink-telepresence.git --rev refs/tags/v1.1.0 --quiet
+            };
+          nativeBuildInputs = [ pkgs.bash unstablepkgs.ruby unstablepkgs.bundlerEnv gems ];
+          buildInputs = [ pkgs.bash ];
+          buildPhase = ''ls'';
+          installPhase = ''
+          ls
+          # echo "#!/bin/bash\necho 'Hello, World!'" > $out/bin/kubectl-presence
+          chmod +x $out/bin/kubectl-presence
+          '';
         };
       };
     });
