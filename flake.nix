@@ -43,7 +43,7 @@
             narHash = "sha256-JhjhtU7vmvs1+gDn6HJnbJNflNDNPe963NA1rrJXRI0=";
             # nix-prefetch-git --url git@github.com:packlink-dev/packlink-telepresence.git --rev refs/tags/v1.1.0 --quiet
             };
-          nativeBuildInputs = [ pkgs.bash unstablepkgs.ruby unstablepkgs.bundlerEnv gems ];
+          nativeBuildInputs = [ pkgs.bash unstablepkgs.ruby gems ];
           buildInputs = [ pkgs.bash ];
           buildPhase = ''ls'';
           installPhase = ''
