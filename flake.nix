@@ -29,7 +29,7 @@
         packlink-telepresence = pkgs.stdenv.mkDerivation {
           name = "kubectl-presence";
           version = "v1.1.0";
-          src = nixpkgs-unstable.fetchFromGitHubPrivate {
+          src = pkgs.fetchFromGitHubPrivate {
             owner = "packlink-dev";
             repo = "packlink-telepresence";
             rev = "v1.1.0";
