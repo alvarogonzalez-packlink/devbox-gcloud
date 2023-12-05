@@ -26,7 +26,7 @@
           cloud_sql_proxy
           cbt
         ]);
-        kubectl-presence = nixpkgs.stdenv.mkDerivation {
+        packlink-telepresence = nixpkgs.stdenv.mkDerivation {
           name = "kubectl-presence";
           version = "v1.1.0";
           src = nixpkgs.fetchFromGitHubPrivate {
