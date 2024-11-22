@@ -31,8 +31,9 @@
           gke-gcloud-auth-plugin
           kpt
           config-connector
-          cloud_sql_proxy
+          cloud-sql-proxy
           cbt
+          pubsub-emulator
         ]);
         packlink-telepresence = pkgs.stdenv.mkDerivation {
           name = "kubectl-presence";
