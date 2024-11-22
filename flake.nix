@@ -31,7 +31,7 @@
           gke-gcloud-auth-plugin
           kpt
           config-connector
-          cloud-sql-proxy
+          cloud_sql_proxy
           cbt
           pubsub-emulator
         ]);
